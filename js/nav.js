@@ -41,15 +41,21 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadPage(page) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if (this.readyState === 4) {
+            if (this.readyState == 4) {
                 var content = document.querySelector("#body-content");
+                
+                if (page === "standing") {
+                    getAllStandings();
+                } else if (page === "teams") {
+                    getAllTeams();
+                } else if (page === "detail-team") {
+                    getDetailTeam();
+                } else if (page === "saved") {
+                    getSavedTeams();
+                }
+
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
-                    //GetData
-                    if (page === "standing") getAllStandings();
-                    if (page === "teams") getAllTeams();
-                    if (page === "detail-team") getDetailTeam();
-                    if (page === "favorite") getTeamList();
                 } else if (this.status === 404) {
                     content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
                 } else {

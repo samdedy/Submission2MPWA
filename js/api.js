@@ -155,8 +155,8 @@ function showTeams(data) {
 function getTeamsById() {
 	return new Promise(function(resolve, reject) {
 		// Ambil nilai query parameter (?id=)
-		var urlParams = new URLSearchParams(window.location.search);
-		var idParam = urlParams.get("id");
+		let urlParams = new URLSearchParams(window.location.search);
+		let idParam = urlParams.get("id");
 		let datas = "";
 		let squad = "";
 
@@ -166,7 +166,7 @@ function getTeamsById() {
 					response.json().then(function(data) {
 
 						data.activeCompetitions.forEach(function (data) {
-							datas += `
+						datas += `
 							<tr>
 								<td>${data.area.name}</td>
 								<td>${data.name}</td>
@@ -242,7 +242,7 @@ function getTeamsById() {
 							</div>
 
 						</div>
-					`;
+						`;
 						// Sisipkan komponen card ke dalam elemen dengan id #content
 						document.getElementById("body-content").innerHTML = articleHTML;
 
@@ -263,11 +263,11 @@ function getTeamsById() {
 
 				data.activeCompetitions.forEach(function (data) {
 					datas += `
-					<tr>
-						<td>${data.area.name}</td>
-						<td>${data.name}</td>
-					</tr>
-					`;
+						<tr>
+							<td>${data.area.name}</td>
+							<td>${data.name}</td>
+						</tr>
+						`;
 				});
 
 				data.squad.forEach(function (data) {
@@ -348,4 +348,132 @@ function getTeamsById() {
 				resolve(data);
 			});
 		});
+}
+
+function getSavedTeams() {
+	getAll().then(function(teams) {
+	  console.log("data saved team : ",teams);
+	  // Menyusun komponen card artikel secara dinamis
+	  var teamsHTML = "";
+	  teams.forEach(function(team) {
+		teamsHTML += `
+			<div class="col s12 m6">
+				<div class="card">
+					<div class="card-content cardteam">
+						<div class="card-image">
+							<img class="responsive-img" src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}">
+						</div>
+						<div class="card-content center-align">
+							<h5>${team.name} - ${team.area.name}</h3>
+							<p>${team.shortName}</p>
+							<p>${team.address}</p>
+							<a href="${team.website}">${team.website}</a>
+							<p>${team.founded}</p>
+						</div>
+						<div class="card-action center-align">
+							<a href="./detail-team.html?id=${team.id}&saved=true" class="blue-text">Detail Team</a>
+						</div>
+					</div>
+				</div>
+			</div>
+				`;
+	  });
+	  // Sisipkan komponen card ke dalam elemen dengan id #body-content
+	  document.getElementById("saved").innerHTML = teamsHTML;
+	});
+}
+
+function getSavedTeamById() {
+	let urlParams = new URLSearchParams(window.location.search);
+	let idParam = urlParams.get("id");
+	let datas = "";
+	let squad = "";
+	
+	getById(parseInt(idParam)).then(function(team) {
+		console.log("team",team);
+		team.activeCompetitions.forEach(function (team) {
+			datas += `
+				<tr>
+					<td>${team.area.name}</td>
+					<td>${team.name}</td>
+				</tr>
+				`;
+		});
+
+		team.squad.forEach(function (team) {
+			squad += `
+			<tr>
+				<td>${team.name}</td>
+				<td>${team.position}</td>
+				<td>${team.dateOfBirth}</td>
+				<td>${team.countryOfBirth}</td>
+				<td>${team.role}</td>
+			</tr>
+			`;
+		});
+
+		// Objek JavaScript dari response.json() masuk lewat variabel team.
+		// console.log(team);
+		// Menyusun komponen card artikel secara dinamis
+		let teamHTML = `
+		<div class="row">
+
+			<div class="col s12 m6">
+				<div class="card horizontal">
+					<div class="card-image">
+						<img class="responsive-img" src="${team.crestUrl}">
+					</div>
+					<div class="card-content center-align">
+					<span class="card-title">${team.name}</span>
+						<p>${team.shortName}</p>
+						<p>${team.address}</p>
+						<p>${team.phone}</p>
+						<p>${team.venue}</p>
+						<a href="${team.website}">${team.website}</a>
+						<p>${team.founded}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col s12 m6 center-align">
+				<h5>Active Competitions</h5>
+				<table class="striped">
+					<thead>
+						<tr>
+							<th>Area</th>
+							<th>Competitions Name</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						${datas}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col s12 m12 center-align">
+				<h4>Squad Team</h4>
+				<table class="striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Position</th>
+							<th>Date Of Birth</th>
+							<th>Country Of Birth</th>
+							<th>Role</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						${squad}
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		`;
+		
+	  // Sisipkan komponen card ke dalam elemen dengan id #content
+	  document.getElementById("body-content").innerHTML = teamHTML;
+	});
 }
