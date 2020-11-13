@@ -361,6 +361,7 @@ function getSavedTeams() {
 				<div class="card">
 					<div class="card-content cardteam">
 						<div class="card-image">
+							<a id="del-saved-${team.id}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">cancel</i></a>
 							<img class="responsive-img" src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}">
 						</div>
 						<div class="card-content center-align">
@@ -377,9 +378,18 @@ function getSavedTeams() {
 				</div>
 			</div>
 				`;
-	  });
-	  // Sisipkan komponen card ke dalam elemen dengan id #body-content
-	  document.getElementById("saved").innerHTML = teamsHTML;
+		});
+		// Sisipkan komponen card ke dalam elemen dengan id #body-content
+		document.getElementById("saved").innerHTML = teamsHTML;
+			
+		teams.forEach((team) => {
+			let delSaved = document.getElementById(`del-saved-${team.id}`);
+			delSaved.onclick = () => {
+				console.log("berhasil di clik delete")
+				deleteSavedTeam(team);
+				document.getElementById("saved").innerHTML = teamsHTML
+			};
+		});
 	});
 }
 
