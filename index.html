@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#e65100">
+    <meta name="theme-color" content="#2196f3">
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -33,22 +33,8 @@
 <script src="js/db.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/api.js"></script>
+<script src="js/pushApi.js"></script>
 <!-- <script src="js/api/"></script> -->
-<script>
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function () {
-            navigator.serviceWorker
-                .register("/service-worker.js")
-                .then(function () {
-                    console.log("Pendaftaran ServiceWorker berhasil");
-                })
-                .catch(function () {
-                    console.log("Pendaftaran ServiceWorker gagal");
-                });
-        });
-    } else {
-        console.log("ServiceWorker belum didukung browser ini.");
-    }
-</script>
+<script src="js/swRegister.js"></script>
 </body>
 </html>

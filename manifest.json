@@ -1,20 +1,16 @@
 {
-  "name": "Football Pocket",
-  "short_name": "FPocket",
+  "name": "Football MPWA",
+  "short_name": "FMPWA",
   "description": "Free Football Apps",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#f57c00",
-  "theme_color": "#f57c00",
+  "background_color": "#2196f3",
+  "theme_color": "#2196f3",
+  "gcm_sender_id": "275173603235",
   "icons": [
     {
-      "src": "/icon/icon-48.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon/icon-96.png",
-      "sizes": "96x96",
+      "src": "/icon/icon.png",
+      "sizes": "512x512",
       "type": "image/png"
     },
     {

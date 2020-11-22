@@ -224,7 +224,7 @@ function getTeamsById() {
 
 							<div class="col s12 m12 center-align">
 								<h4>Squad Team</h4>
-								<table class="striped">
+								<table class="responsive-table">
 									<thead>
 										<tr>
 											<th>Name</th>
@@ -323,7 +323,7 @@ function getTeamsById() {
 
 					<div class="col s12 m12 center-align">
 						<h4>Squad Team</h4>
-						<table class="striped">
+						<table class="responsive-table">
 							<thead>
 								<tr>
 									<th>Name</th>
@@ -463,7 +463,7 @@ function getSavedTeamById() {
 
 			<div class="col s12 m12 center-align">
 				<h4>Squad Team</h4>
-				<table class="striped">
+				<table class="responsive-table">
 					<thead>
 						<tr>
 							<th>Name</th>

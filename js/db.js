@@ -13,7 +13,7 @@ function saveTeam(team) {
       let tx = db.transaction("teams", "readwrite");
       let store = tx.objectStore("teams");
       console.log(team);
-			store.add(team);
+			store.put(team);
 			// store.put(team);
 			console.log("Team berhasil di simpan.");
       return tx.complete;
